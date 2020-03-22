@@ -1,0 +1,15 @@
+# Override file used for configuration wanted on dev but not on prod
+version: '3.3'
+
+services: 
+    nginx:
+        build: .docker/nginx
+        volumes: 
+            - ./app:/var/www/html
+            - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+    php:
+        build: .docker/php
+        volumes: 
+            - ./app:/var/www/html
+            - "~/.cache/composer:/home/www-data/.composer/cache"

@@ -18,6 +18,8 @@ RUN apk --no-cache add shadow && \
 
 WORKDIR /var/www/html
 
+COPY --chown=www-data:www-data app .
+
 EXPOSE 9000
 
 USER www-data
