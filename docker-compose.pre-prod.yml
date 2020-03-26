@@ -1,0 +1,29 @@
+version: '3.3'
+
+services: 
+    db:
+        environment: 
+            - MYSQL_ROOT_PASSWORD=${db_root_password}
+            - MYSQL_DATABASE=${db_name}
+            - MYSQL_USER=${db_user_name}
+            - MYSQL_PASSWORD=${db_user_password}
+
+    nginx:
+        build: 
+            context: .
+            dockerfile: .docker/nginx/Dockerfile
+        volumes:
+            - ./app:/var/www/html
+            - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        labels: 
+            - traefik.frontend.rule=Host:${symfony_url}
+            - traefik.frontend.redirect.entryPoint=https
+            - ghosts.host=${symfony_url}
+            - ghosts.proto=https
+
+    php:
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+        volumes: 
+            - ./app:/var/www/html
