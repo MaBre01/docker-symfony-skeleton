@@ -26,6 +26,8 @@ RUN usermod -u ${UID} www-data && \
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
 
+VOLUME [ "/home/www-data/.composer/cache" ]
+
 COPY ./.docker/php/php.ini /usr/local/etc/php/php.ini
 COPY ./.docker/php/php-fpm-pool.conf /usr/local/etc/php-fpm.d/www.conf
 
@@ -37,6 +39,6 @@ EXPOSE 9000
 
 COPY ./.docker/php/docker-entrypoint.sh /
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
-CMD ["php-fpm"]
+CMD [ "php-fpm" ]
