@@ -14,7 +14,3 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-###> local docker ###
-/.docker/mariadb/db-dumps
-###< local docker ###
