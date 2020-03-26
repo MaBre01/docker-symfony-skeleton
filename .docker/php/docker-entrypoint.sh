@@ -1,20 +1,14 @@
 #!/usr/bin/env sh
 
-UID=$(id -u)
-GID=$(id -g)
-
 updated=false
 
-echo "Current UID : $UID"
-echo "Current GID : $GID"
-
-if [ "$UID" -ne 1000 ]; then
+if [ -n "$UID" ]; then
     echo "Updating www-data UID to $UID"
     usermod -u "$UID" www-data
     updated=true
 fi
 
-if [ "$GID" -ne 1000 ]; then
+if [ -n "$GID" ]; then
     echo "Updating www-data GID to $GID"
     usermod -g "$GID" www-data
     updated=true
@@ -25,4 +19,4 @@ if [ "$updated" = true ]; then
     chown www-data:www-data /var/www/html /home/www-data
 fi
 
-exec "${@}"
+su-exec "www-data" "${@}"

@@ -6,3 +6,5 @@
 !/.docker/mariadb/db-dumps/.keep
 
 ###< local docker ###
+
+/.env
