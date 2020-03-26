@@ -19,4 +19,8 @@ if [ "$updated" = true ]; then
     chown www-data:www-data /var/www/html /home/www-data
 fi
 
+# being able to write to /dev/stdout not only by root user
+# https://github.com/moby/moby/issues/31243
+chmod o+w /dev/stdout
+
 su-exec "www-data" "${@}"
