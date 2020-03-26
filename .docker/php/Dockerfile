@@ -33,4 +33,9 @@ COPY --chown=www-data:www-data app .
 EXPOSE 9000
 
 USER www-data
+
+COPY ./.docker/php/docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 CMD ["php-fpm"]
