@@ -19,7 +19,9 @@ ENV GID 1000
 
 RUN usermod -u ${UID} www-data && \
     groupmod -g ${GID} www-data && \
-    chown www-data:www-data /var/www/html /home/www-data
+    chown www-data:www-data /var/www/html /home/www-data && \
+    usermod -a -G tty www-data && \
+    usermod -a -G tty nobody
 
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer

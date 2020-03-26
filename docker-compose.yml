@@ -49,3 +49,4 @@ services:
         environment: 
             - UID=${uid}
             - GID=${gid}
+        tty: true

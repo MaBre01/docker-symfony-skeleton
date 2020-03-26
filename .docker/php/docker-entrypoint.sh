@@ -10,7 +10,7 @@ fi
 
 if [ -n "$GID" ]; then
     echo "Updating www-data GID to $GID"
-    usermod -g "$GID" www-data
+    groupmod -g "$GID" www-data
     updated=true
 fi
 
@@ -18,9 +18,5 @@ if [ "$updated" = true ]; then
     echo "Reapply folders ownership to www-data"
     chown www-data:www-data /var/www/html /home/www-data
 fi
-
-# being able to write to /dev/stdout not only by root user
-# https://github.com/moby/moby/issues/31243
-chmod o+w /dev/stdout
 
 su-exec "www-data" "${@}"
