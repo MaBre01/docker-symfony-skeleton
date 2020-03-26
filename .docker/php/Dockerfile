@@ -4,6 +4,9 @@ RUN apk add --no-cache \
     git \
     shadow
 
+RUN apk add --no-cache \
+    icu-dev
+
 RUN docker-php-ext-configure intl && \
     docker-php-ext-install \
     intl \
@@ -20,8 +23,8 @@ RUN usermod -u ${UID} www-data && \
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
 
-COPY php.ini /usr/local/etc/php/php.ini
-COPY php-fpm-pool.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./.docker/php/php.ini /usr/local/etc/php/php.ini
+COPY ./.docker/php/php-fpm-pool.conf /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /var/www/html
 
