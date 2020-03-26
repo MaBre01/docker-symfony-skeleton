@@ -1,3 +1,8 @@
 ###> local docker ###
-/.docker/mariadb/db-dumps
+
+# ignore files in folder foo
+/.docker/mariadb/db-dumps/*
+# but keep the folder
+!/.docker/mariadb/db-dumps/.keep
+
 ###< local docker ###
