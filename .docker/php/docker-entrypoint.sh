@@ -16,7 +16,7 @@ fi
 
 if [ "$updated" = true ]; then
     echo "Reapply folders ownership to www-data"
-    chown www-data:www-data /var/www/html /home/www-data
+    chown -R www-data:www-data /var/www/html /home/www-data
 fi
 
 su-exec "www-data" "${@}"
