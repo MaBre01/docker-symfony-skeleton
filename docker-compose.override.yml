@@ -1,7 +1,14 @@
 # Override file used for configuration wanted on dev but not on prod
-version: '3.3'
+version: '3.5'
 
-services: 
+services:
+    db:
+        environment: 
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=symfony
+            - MYSQL_USER=symfony
+            - MYSQL_PASSWORD=symfony
+
     nginx:
         build: 
             context: .
@@ -9,6 +16,9 @@ services:
         volumes: 
             - ./app:/var/www/html
             - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        labels: 
+            - traefik.frontend.rule=Host:symfony.local
+            - ghosts.host=symfony.local
 
     php:
         build:
